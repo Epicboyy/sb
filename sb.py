@@ -8,7 +8,7 @@ from multiprocessing import Pool, Process
 from ffmpy import FFmpeg
 import time, random, asyncio, timeit, sys, json, codecs, threading, glob, re, string, os, requests, subprocess, six, urllib, urllib.parse, ast, pytz, wikipedia, pafy, youtube_dl, atexit
 
-print ("\nBY: SELFBOT-BY:MAX\n")
+print ("\n Yinmo半垢 \n")
 
 client = LINE()
 #client = LINE(authToken="YOUR TOKEN")
@@ -16,7 +16,7 @@ client.log("YOUR TOKEN : {}".format(str(client.authToken)))
 channel = LINEChannel(client,client.server.CHANNEL_ID['LINE_TIMELINE'])
 client.log("CHANNEL TOKEN : " + str(channel.getChannelResult()))
 
-print ("LOGIN SUCCESS LINE")
+print ("登入成功")
 
 clientProfile = client.getProfile()
 clientSettings = client.getSettings()
@@ -25,7 +25,7 @@ call = client
 mid = [client]
 myMID = client.profile.mid
 Admin=[myMID]
-Owner=["uafd65893655c791f07c9ff31cbbc28d1"]
+Owner=["ufe1707ae9b2ff7ab61505795b7995440"]
 Team = Admin + mid + Owner
 
 contact = client.getProfile()
@@ -39,7 +39,7 @@ Connect_to = {
     "SpamInvite":False,
     "limit": 5,
     "Contact":False,
-    "GName":"SELFBOT-BY:MAX",
+    "GName":"尹莫",
     "AutoRespon":True,
     "KickRespon":False,
     "KillOn":False,
@@ -51,7 +51,7 @@ Connect_to = {
     "Invite":False,
     "Copy":False,
     "autoAdd":True,
-    "PesanAdd":"Terima Kasih Sudah Add Saya",
+    "PesanAdd":"加我有事?",
     "ContactAdd":{},
     "autoBlock":True,
     "autoJoin":True,
@@ -77,9 +77,9 @@ Connect_to = {
     "Blacklist":{},
     "Ban":False,
     "Unban":False,
-    "comment": "autolike by SELFBOT-BY:MAX",
+    "comment": "自動按讚by尹莫",
     "Admin": {
-        "uafd65893655c791f07c9ff31cbbc28d1":True #MID ADMIN TARO DISINI
+        "ufe1707ae9b2ff7ab61505795b7995440":True #權限者mid
     },
 }
 
@@ -137,14 +137,14 @@ cctv={
 Help ="""
 ╭──────────
 ├──────────
-│help
-│help2
-│help3
-│help4
-│help5
+│help 呼叫指令表
+│help2 指令表2
+│help3 指令表3
+│help4 指令表4
+│help5 指令表5
 ├──────────
-├─[TRANSLATE]
-│indonesian:
+├─[翻譯]
+│indonesian: 
 │english:
 │korea:
 │japan:
@@ -158,33 +158,32 @@ Help ="""
 Help2 ="""
 ╭───────────
 ├───────────
-│me
-│status
-│my name
-│my bio
-│my picture
-│my cover
-│my video
-│speed
-│rename
-│my bot
-│my team
-│stealname [@]
-│stealbio [@]
-│stealpict [@]
-│stealcover [@]
-│stealvideo [@]
-│stealmid [@]
-│profile [@]
-│cekmid: [mid]
-│friendlist
-│friendlist mid
-│runtime
-│changename:
-│changebio:
-│remove pesan
-│restart
-│bot logout
+│me 丟出自己友資
+│status 狀態
+│my name 我的名字
+│my bio 我的各簽
+│my picture 我的頭貼
+│my cover 我的封面
+│my video 影片頭貼
+│speed 測速
+│rename 命名
+│my team 作者
+│stealname [@] 被標註者名字
+│stealbio [@] 被標註者各簽
+│stealpict [@] 被標註者頭貼
+│stealcover [@] 被標註者封面
+│stealvideo [@] 被標註者影片頭貼
+│stealmid [@] 被標註者mid
+│profile [@] 被標註者資料
+│cekmid: [mid] 查詢友資
+│friendlist 好友名單
+│friendlist mid 好友mid
+│runtime 運行時間
+│changename: 更改姓名
+│changebio: 更改各簽
+│remove pesan 清理訊息
+│restart 重啟
+│bot logout 安靜模式
 ├───────────
 ╰───────────
 """
@@ -218,36 +217,36 @@ Help3 ="""
 Help4 ="""
 ╭───────────
 ├───────────
-│unsend on/off
-│changepp on/off
-│timeline on/off
-│autojoin on/off
-│autoreject on/off
-│auto jointicket on/off
-│gift:on/off
-│copy on/off
-│spam on [jmlah teks]
-│kick [on,off->kickall]
-│invite on/off
-│kill on/off
-│link on/off
-│lurking on/off/reset
-│lurking read
-│sider on/off
-│welcome on/off
-│leave on/off
-│adminadd [@]
-│admindel [@]
-│admin:add-on
-│admin:del-on
-│clone [@]
-│comeback
-│steal on/off
-│contact on/off
-│mic:add-on
-│mic:del-on
-│mimic on/off
-│mimiclist
+│unsend on/off 收回開/關
+│changepp on/off 更改頭貼開/關
+│timeline on/off 文章預覽開/關
+│autojoin on/off 自動進群開/關
+│autoreject on/off 拒絕群邀開/關
+│auto jointicket on/off 自動入群開/關
+│gift:on/off 贈禮開/關
+│copy on/off 複製開/關
+│spam on 刷屏
+│kick on/off->kickall 翻群
+│invite on/off 邀請開/關
+│kill on/off 踢人
+│link on/off 開/關網址
+│lurking on/off/reset 設置已讀
+│lurking read 查看已讀
+│sider on/off 抓潛水
+│welcome on/off 歡迎通知開/關
+│leave on/off 退群通知開/關
+│adminadd [@] 新增權限
+│admindel [@] 刪除權限
+│admin:add-on 新增權限
+│admin:del-on 刪除權限
+│clone [@] 有趣的東西
+│comeback 復原
+│steal on/off 複製
+│contact on/off 友資鑑定開/關
+│mic:add-on 模仿
+│mic:del-on 模仿
+│mimic on/off 模仿說話開/關
+│mimiclist 模仿名單
 ├───────────
 ╰───────────
 """
@@ -255,31 +254,31 @@ Help4 ="""
 Help5 ="""
 ╭───────────
 ├───────────
-│gcall
-│broadcast:
-│contactbc:
-│leaveall grup
-│rejectall grup
-│mentionall
-│changewelcome:
-│changeleave:
-│memberlist
-│my grup
-│gurl
-│gcreator
-│invite gcreator
-│ginfo
-│grup id
-│cfotogrup on/off
-│spaminvite on/off
-│announce
-│refresh
-│kick [@]
-│banlock [@]
-│banlist
-│contact ban
-│clear ban
-│blocklist
+│gcall 邀通
+│broadcast: 群組廣播
+│contactbc: 友資廣播
+│leaveall grup 清群
+│rejectall grup 拒絕所有群邀
+│mentionall 用了會被揍
+│changewelcome: 更改進群通知
+│changeleave: 更改退群通知
+│memberlist 成員名單
+│my grup 我在的群組
+│gurl 群組網址
+│gcreator 群創
+│invite gcreator 邀請群創
+│ginfo 群組資訊
+│grup id 群組id
+│cfotogrup on/off 更改群圖
+│spaminvite on/off 簡易邀機
+│announce 公告(?
+│refresh 刷新
+│kick [@] 標註踢出
+│banlock [@] 標註黑單
+│banlist 黑名單
+│contact ban 黑單友資
+│clear ban 清空黑單
+│blocklist 封鎖名單
 ├───────────
 ╰───────────
 """
@@ -291,7 +290,7 @@ def waktu(secs):
     month, days = divmod(days,30)
     year, month = divmod(month,12)
     century, year = divmod(year,100)
-    return '\n%02d Abad\n%02d Tahun\n%02d Bulan\n%02d Hari\n%02d Jam\n%02d Menit\n%02d Detik' % (century, year, month, days, hours, mins, secs)
+    return '\n%02d 世紀\n%02d 年\n%02d 月\n%02d 天\n%02d 小時\n%02d 分鐘\n%02d 秒' % (century, year, month, days, hours, mins, secs)
 
 def restart_program():
     python = sys.executable
@@ -305,7 +304,7 @@ def LINE_OP_TYPE(op):
             if myMID in op.param3:
               if Connect_to['autoJoin'] == True:
                     client.acceptGroupInvitation(op.param1)
-                    print ("ANDA JOIN DI GRUP")
+                    print ("尹莫加入一個群組")
                     pass
 
         if op.type == 13:
@@ -331,15 +330,15 @@ def LINE_OP_TYPE(op):
                             if " " in Name:
                                 nick = Name.split(' ')
                                 if len(nick) == 2:
-                                    client.arifistifik(op.param1,op.param2," Hii\n","" + "\n Terus aku harus gimana kak?" )
+                                    client.arifistifik(op.param1,op.param2," 安安\n","" + "\n 早安" )
                                     client.sendContact(op.param1, op.param2)
                                     client.sendImageWithURL(op.param1, "http://dl.profile.line-cdn.net{}".format(kopi))
                                 else:
-                                    client.arifistifik(op.param1,op.param2," Nah\n","" + "\n Serius ga mau chat kak ??" )
+                                    client.arifistifik(op.param1,op.param2," 欸欸\n","" + "\n 出來陪我聊天" )
                                     client.sendContact(op.param1, op.param2)
                                     client.sendImageWithURL(op.param1, "http://dl.profile.line-cdn.net{}".format(kopi))
                             else:
-                                client.arifistifik(op.param1,op.param2," Hey\n","" + "\n Woy ngelamun aje lu... !!! awas kesurupan!" )
+                                client.arifistifik(op.param1,op.param2," 欸欸\n","" + "\n 乃群通嘛~" )
                                 client.sendContact(op.param1, op.param2)
                                 client.sendImageWithURL(op.param1, "http://dl.profile.line-cdn.net{}".format(kopi))
                     else:
@@ -366,17 +365,17 @@ def LINE_OP_TYPE(op):
             if Connect_to["Welcome"] == True:
                 if op.param2 not in mid:
                     ginfo = client.getGroup(op.param1)
-                    client.arifistifik(op.param1,op.param2," Hii","" + "\n " + str(Connect_to['WcText']))
+                    client.arifistifik(op.param1,op.param2," 安安","" + "\n " + str(Connect_to['WcText']))
                     client.sendMessage(op.param1, None, contentMetadata={'mid':op.param2}, contentType=13)
-                    print ("MEMBER HAS JOIN THE GROUP")
+                    print ("一個變態加入群組")
 
         if op.type == 15:
             if Connect_to["Leave"] == True:
                 if op.param2 not in mid:
                     ginfo = client.getGroup(op.param1)
-                    client.arifistifik(op.param1,op.param2," Hii","" + "\n " + str(Connect_to['LvText']))
+                    client.arifistifik(op.param1,op.param2," 再見","" + "\n " + str(Connect_to['LvText']))
                     client.sendMessage(op.param1, None, contentMetadata={'mid':op.param2}, contentType=13)
-                    print ("MEMBER HAS LEFT THE GROUP")
+                    print ("一個王八蛋退群")
 
         if op.type == 46:
             if op.param2 in Admin:
@@ -480,7 +479,7 @@ def LINE_OP_TYPE(op):
                         dia += "\n3. Pesannya : {}".format(str(msg_dict[msg.id]["rider"]))
                         client.arifistifik(you,man," Nah","\n\n" +str(dia))
               except:
-                  client.sendMessage(you, "Return")
+                  client.sendMessage(you, "無法查看收回")
 
         if op.type in [25,26]:
             msg = op.message
